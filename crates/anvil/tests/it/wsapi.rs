@@ -18,6 +18,13 @@ async fn can_get_block_number_ws() {
     // ws endpoint: ws://127.0.0.1:35913
     // It is NOT 8545
 
+    println!("http_endpoint: {}", handle.http_endpoint());
+    // Output: 
+    // http_endpoint: http://127.0.0.1:44703
+    // Identical to the ws endpoint
+
+
+
     let num = provider.get_block_number().await.unwrap();
     assert_eq!(num, block_num.to::<u64>());
     println!("num: {}", num);
