@@ -20,6 +20,7 @@ pub async fn serve(
     api: EthApi,
     config: ServerConfig,
 ) -> io::Result<impl Future<Output = io::Result<()>>> {
+    println!("INSIDE OF SERVE");
     let tcp_listener = TcpListener::bind(addr).await?;
     Ok(serve_on(tcp_listener, api, config))
 }
@@ -30,6 +31,7 @@ pub async fn serve_on(
     api: EthApi,
     config: ServerConfig,
 ) -> io::Result<()> {
+    println!("INSIDE SERVE ON");
     axum::serve(tcp_listener, router(api, config).into_make_service()).await
 }
 

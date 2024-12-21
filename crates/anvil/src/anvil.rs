@@ -39,6 +39,9 @@ pub enum AnvilSubcommand {
 }
 
 fn main() {
+    println!("
+    INSIDE MAIN");
+
     if let Err(err) = run() {
         let _ = foundry_common::sh_err!("{err:?}");
         std::process::exit(1);
@@ -74,6 +77,7 @@ fn run() -> Result<()> {
 
     let _ = fdlimit::raise_fd_limit();
     tokio::runtime::Builder::new_multi_thread().enable_all().build()?.block_on(args.node.run())
+    
 }
 
 #[cfg(test)]

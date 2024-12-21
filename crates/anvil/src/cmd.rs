@@ -315,12 +315,14 @@ impl NodeArgs {
     ///
     /// See also [crate::spawn()]
     pub async fn run(self) -> eyre::Result<()> {
+        print!("Calling NodeArgs.run()");
         let dump_state = self.dump_state_path();
         let dump_interval =
             self.state_interval.map(Duration::from_secs).unwrap_or(DEFAULT_DUMP_INTERVAL);
         let preserve_historical_states = self.preserve_historical_states;
 
         let (api, mut handle) = crate::try_spawn(self.into_node_config()?).await?;
+        println!("ws_endpoint: {}", handle.ws_endpoint());
 
         // sets the signal handler to gracefully shutdown.
         let mut fork = api.get_fork();
