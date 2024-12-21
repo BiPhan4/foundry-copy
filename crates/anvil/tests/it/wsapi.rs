@@ -13,6 +13,10 @@ async fn can_get_block_number_ws() {
     assert_eq!(block_num, U256::ZERO);
 
     let provider = handle.ws_provider();
+    println!("ws endpoint: {}", handle.ws_endpoint());
+    // Output:
+    // ws endpoint: ws://127.0.0.1:35913
+    // It is NOT 8545
 
     let num = provider.get_block_number().await.unwrap();
     assert_eq!(num, block_num.to::<u64>());
