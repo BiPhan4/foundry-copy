@@ -8,12 +8,16 @@ use anvil::{spawn, NodeConfig};
 async fn can_get_block_number_ws() {
     let (api, handle) = spawn(NodeConfig::test()).await;
     let block_num = api.block_number().unwrap();
+    println!("block_num: {}", block_num);
+
     assert_eq!(block_num, U256::ZERO);
 
     let provider = handle.ws_provider();
 
     let num = provider.get_block_number().await.unwrap();
     assert_eq!(num, block_num.to::<u64>());
+    println!("num: {}", num);
+
 }
 
 #[tokio::test(flavor = "multi_thread")]
